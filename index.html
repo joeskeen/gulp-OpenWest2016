@@ -15,25 +15,27 @@
 
 	<style>
 		.eventInfo {
-			position: absolute; 
-			bottom: 10px; 
-			left: 10px; 
-			color: darkgray; 
+			position: absolute;
+			bottom: 10px;
+			left: 10px;
+			color: darkgray;
 			font-family: sans-serif;
 			display: flex;
 			flex-flow: row;
 			font-size: small;
 		}
+		
 		#timer {
-			position: absolute; 
-			bottom: 10px; 
-			right: 100px; 
-			color: #555; 
+			position: absolute;
+			bottom: 10px;
+			right: 100px;
+			color: #666;
 			font-family: sans-serif;
 			display: flex;
 			flex-flow: row;
 			font-size: x-small;
 		}
+		
 		.spacer {
 			width: 15px;
 			height: 15px;
@@ -128,7 +130,7 @@
 				<section>
 					<h3>The problem</h3>
 					Building a production-quality web app requires a lot of steps<br /><br />
-					<i>*for the purposes of this discussion we'll talk about building an Angular 1.x app with TypeScript</i>
+					<i class="fragment">*for the purposes of this discussion we'll talk about building an Angular 1.x app with TypeScript</i>
 				</section>
 				<section>
 					<h3>High-Level Objectives</h3>
@@ -156,24 +158,21 @@
 				</section>
 			</section>
 			<!--<section>
-					<h1>test?</h1>
-					<div class="stretch">
-						<monaco-editor language="html" url="./index.html"></monaco-editor>
-					</div>
-				</section>-->
+				<h1>test?</h1>
+				<div class="stretch">
+					<monaco-editor language="html" url="./index.html"></monaco-editor>
+				</div>
+			</section>-->
 			<section data-background="images/bill-gates-quotes2.jpg?source=http://cdn4.geckoandfly.com/wp-content/uploads/2014/02/bill-gates-quotes2.jpg">
 			</section>
 		</div>
 	</div>
 
 	<div class="eventInfo">
-		<img src="images/openwest-white.svg?source=https://cfp.openwest.org/uploads/openwest-white.svg" 
-				 alt="OpenWest logo" style="width: 200px">
+		<img src="images/openwest-white.svg?source=https://cfp.openwest.org/uploads/openwest-white.svg" alt="OpenWest logo" style="width: 200px">
 		<div class="spacer"></div>
 		<p>
-			OpenWest Conference 2016<br />
-			July 13-16 2016<br />
-			South Towne Expo Center
+			OpenWest Conference 2016<br /> July 13-16 2016<br /> South Towne Expo Center
 		</p>
 	</div>
 
@@ -224,7 +223,7 @@
 					var secondsRemaining = Math.floor((msRemaining / 1000) % 60); 
 					var minutesRemaining = Math.floor((msRemaining / 1000 / 60) % 60); 
 					var hoursRemaining = Math.floor(msRemaining / 1000 / 60 / 60); 
-					timerElement.innerText = hoursRemaining + ':' + minutesRemaining + ':' + secondsRemaining;
+					timerElement.innerText = hoursRemaining + ':' + minutesRemaining; // + ':' + secondsRemaining;
 				}, 1000);
 				
 				function practiceTimeRemaining() {
