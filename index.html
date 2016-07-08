@@ -1,50 +1,241 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<style>
+		.eventInfo {
+			position: absolute; 
+			bottom: 10px; 
+			left: 10px; 
+			color: darkgray; 
+			font-family: sans-serif;
+			display: flex;
+			flex-flow: row;
+			font-size: small;
+		}
+		#timer {
+			position: absolute; 
+			bottom: 10px; 
+			right: 100px; 
+			color: #555; 
+			font-family: sans-serif;
+			display: flex;
+			flex-flow: row;
+			font-size: x-small;
+		}
+		.spacer {
+			width: 15px;
+			height: 15px;
+		}
+	</style>
+
+	<!-- Printing and PDF exports -->
+	<script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h1>Mastering the 'Lazy' Mindset</h1>
+				<h2>Using GulpJS</h2>
+			</section>
+			<!-- todo: add bio -->
+			<section>
+				<h2>So what do you mean by 'lazy'?</h2>
+				<section>
+					<h3>from the <a href="http://www.oxforddictionaries.com/us/definition/american_english/lazy">Oxford Dictionary</a>:</h3>
+					<blockquote>
+						"Unwilling to work or use energy"
+					</blockquote>
+				</section>
+				<section>
+					<h3>from Joe's dictionary:</h3>
+					<blockquote>
+						"Unwilling to work or use energy
+						<u>on things machines can already do for you</u>"
+					</blockquote>
+				</section>
+			</section>
+			<section>
+				<h2>for example</h2>
+			</section>
+			<section>
+				<section>
+					<h2>Web development is easy!</h2>
+					<h3>All you have to know how to do is...</h3>
+					<div class="stretch">
+						<img src="images/wordcloud.png?source=http://timdream.org/wordcloud2.js/" alt="mastering modern web development requires mastering many, many tools and concepts"
+							class="fragment">
+					</div>
+				</section>
+				<section>
+					<h3>...and you need to remember to do all of them in the right order.</h3>
+					<h3 class="fragment">Every time.</h3>
+				</section>
+			</section>
+			<section>
+				<h2>The Lazy Way</h2>
+				<h3>Let a tool manage all that for you</h3>
+			</section>
+			<section>
+				<img src="images/gulp-white-text.svg?source=http://gulpjs.com/img/gulp-white-text.svg" alt="gulp logo" style="border: 0; background-color: rgba(255,0,0,0);">
+				<h2>Can Help</h2>
+				<ul>
+					<li class="fragment">Automate Repetitive Tasks</li>
+					<li class="fragment">Reduce Human Error</li>
+					<li class="fragment">Improve Practices</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Before we get ahead of ourselves</h2>
+				<h3>When is Gulp not a good choice?</h3>
+				<span class="fragment">Adequate task automation is already available</span><br />
+				<span class="fragment">There is very little to automate (if Gulp would be overkill)</span>
+			</section>
+			<section>
+				<h2>When to use Gulp?</h2>
+				<ul>
+					<li class="fragment">Your project doesn't have task automation</li>
+					<li class="fragment">Your project's existing task automation is limiting your productivity</li>
+					<li class="fragment">You are creating a seed project or a generator</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Where do we start?</h2>
+				<section>
+					<blockquote>
+						the most successful lazy people understand the problem they are avoiding
+					</blockquote>
+				</section>
+				<section>
+					<h3>The problem</h3>
+					Building a production-quality web app requires a lot of steps<br /><br />
+					<i>*for the purposes of this discussion we'll talk about building an Angular 1.x app with TypeScript</i>
+				</section>
+				<section>
+					<h3>High-Level Objectives</h3>
+					<ul>
+						<li>serve up code while developing</li>
+						<li>run tests (unit tests and/or ui tests)</li>
+						<li>optimize / bundle app for production</li>
+						<li>serve up production version for prerelease testing</li>
+						<li>deal with the backend server (Node, Java, etc.)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>How would I do the process manually?</h3>
+					<h4>Development</h4>
+					<ul>
+						<li>make a code change and save</li>
+						<li>lint the code</li>
+						<li>compile the TS to JS</li>
+						<li>run ngAnnotate</li>
+						<li>compile SASS to CSS</li>
+						<li>inject script references into HTML file</li>
+						<li>serve the code</li>
+						<li>verify the results</li>
+					</ul>
+				</section>
+			</section>
+			<!--<section>
+					<h1>test?</h1>
+					<div class="stretch">
+						<monaco-editor language="html" url="./index.html"></monaco-editor>
+					</div>
+				</section>-->
+			<section data-background="images/bill-gates-quotes2.jpg?source=http://cdn4.geckoandfly.com/wp-content/uploads/2014/02/bill-gates-quotes2.jpg">
+			</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<div class="eventInfo">
+		<img src="images/openwest-white.svg?source=https://cfp.openwest.org/uploads/openwest-white.svg" 
+				 alt="OpenWest logo" style="width: 200px">
+		<div class="spacer"></div>
+		<p>
+			OpenWest Conference 2016<br />
+			July 13-16 2016<br />
+			South Towne Expo Center
+		</p>
+	</div>
 
-		<script>
+	<div id="timer"></div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+	<script>
 			// More info https://github.com/hakimel/reveal.js#configuration
 			Reveal.initialize({
 				history: true,
+
+				width: 1200,
+				height: 800,
+				margin: .1,
 
 				// More info https://github.com/hakimel/reveal.js#dependencies
 				dependencies: [
 					{ src: 'plugin/markdown/marked.js' },
 					{ src: 'plugin/markdown/markdown.js' },
 					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'node_modules/reveal-monaco/index.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
+				],
+
+				monaco: {
+					theme: 'vs-dark',
+					fontSize: 20
+				}
 			});
+
+			(() => {
+				var presentationStartTime = new Date('Thu Jul 14 2016 11:30:00 GMT-0600 (MDT)');
+				var presentationEndTime = new Date('Thu Jul 14 2016 12:20:00 GMT-0600 (MDT)');
+
+				var loadTime = new Date();
+				var presentationLengthMs = presentationEndTime.getTime() - presentationStartTime.getTime();
+				var fifteenMinutesMs = 1000 * 60 * 15;
+				// in practice mode if within outside of presentation time (with 15 minute buffer)
+				var practiceMode = loadTime.getTime() > (presentationEndTime.getTime() + fifteenMinutesMs)
+					  || loadTime.getTime() < (presentationStartTime.getTime() - fifteenMinutesMs);
+
+				var timeCalcFn = practiceMode ? practiceTimeRemaining : presentationTimeRemaining;
+				var timerElement = document.getElementById('timer');
+				setInterval(() => {
+					var msRemaining = timeCalcFn();
+					var secondsRemaining = Math.floor((msRemaining / 1000) % 60); 
+					var minutesRemaining = Math.floor((msRemaining / 1000 / 60) % 60); 
+					var hoursRemaining = Math.floor(msRemaining / 1000 / 60 / 60); 
+					timerElement.innerText = hoursRemaining + ':' + minutesRemaining + ':' + secondsRemaining;
+				}, 1000);
+				
+				function practiceTimeRemaining() {
+					return presentationLengthMs - (Date.now() - loadTime);
+				}
+
+				function presentationTimeRemaining() {
+					return presentationEndTime - Date.now();
+				}
+			})();
 		</script>
-	</body>
+</body>
+
 </html>
