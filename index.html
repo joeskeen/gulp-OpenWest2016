@@ -121,6 +121,177 @@
 				</ul>
 			</section>
 			<section>
+				<h1>Gulp Basics</h1>
+			</section>
+			<section>
+				<code>gulp.task</code> defines a task 
+				<div class="stretch">
+					<monaco-editor reference='[
+							"/typings/globals/gulp/index.d.ts", 
+							"/typings/globals/orchestrator/index.d.ts", 
+							"/typings/globals/node/index.d.ts", 
+							"/typings/globals/q/index.d.ts" 
+						]'>
+						<script type="text/plain" class="monaco-code">
+import * as gulp from 'gulp';
+
+// run this using `gulp`
+gulp.task('default', () => {
+	//do stuff here
+});
+
+// run this using `gulp async-stuff`
+gulp.task('async-stuff', (done) => {
+	//do stuff here
+	doSomethingAsync((err, result) => {
+		done(); //call the callback when the task is done
+	});
+});
+
+// you can also return a Node stream or a Promise
+							</script>
+					</monaco-editor>
+				</div>
+			</section>
+			<section>
+				<div><code>gulp.src</code> takes source files and creates a stream of file objects</div> 
+				<div><code>gulp.dest</code> writes the transformed source files back to disk</div> 
+				<div class="stretch">
+					<monaco-editor reference='[
+							"/typings/globals/gulp/index.d.ts", 
+							"/typings/globals/orchestrator/index.d.ts", 
+							"/typings/globals/node/index.d.ts", 
+							"/typings/globals/q/index.d.ts" 
+						]'>
+						<script type="text/plain" class="monaco-code">
+import * as gulp from 'gulp';
+
+gulp.task('default', () => {
+	return gulp.src('**/*.js')
+		.pipe(gulp.dest('./out'));
+});
+
+// (no transforms = just copy the files)
+							</script>
+					</monaco-editor>
+				</div>
+			</section>
+			<section>
+				<div>Call <code>.pipe()</code> on the stream to add a transform step for the files</div>
+				<div class="stretch">
+					<monaco-editor reference='[
+							"/typings/globals/gulp/index.d.ts", 
+							"/typings/globals/orchestrator/index.d.ts", 
+							"/typings/globals/node/index.d.ts", 
+							"/typings/globals/q/index.d.ts", 
+							"/typings/globals/vinyl/index.d.ts",  
+							"/typings/globals/gulp-ng-annotate/index.d.ts",
+							"/typings/globals/gulp-sourcemaps/index.d.ts",
+							"/typings/globals/gulp-tslint/index.d.ts",
+							"/typings/globals/gulp-typescript/index.d.ts"
+						]'>
+						<script type="text/plain" class="monaco-code">
+import * as gulp from 'gulp';
+import * as tslint from 'gulp-tslint';
+import * as typescript from 'gulp-typescript';
+import * as ngAnnotate from 'gulp-ng-annotate';
+
+gulp.task('default', () => {
+	return gulp.src('**/*.ts')
+		.pipe(tslint())
+		.pipe(typescript({target: 'es2015', module: 'commonJS'}))
+		.js
+		.pipe(ngAnnotate({remove: true}))
+		.pipe(gulp.dest('out'));
+});
+							</script>
+					</monaco-editor>
+				</div>
+			</section>
+			<section>
+				<div>Gulp plugins give you many options for transforming your files</div>
+				<div class="stretch">
+					<iframe src="http://gulpjs.com/plugins/" frameborder="0" style="width: 100%; height: 100%"></iframe>
+				</div>
+				<div>http://gulpjs.com/plugins/</div>
+			</section>
+			<section>
+				<div>Gulp tasks can depend on other tasks</div>
+				<div class="stretch">
+					<monaco-editor reference='[
+							"/typings/globals/gulp/index.d.ts", 
+							"/typings/globals/orchestrator/index.d.ts", 
+							"/typings/globals/node/index.d.ts", 
+							"/typings/globals/q/index.d.ts", 
+							"/typings/globals/vinyl/index.d.ts",  
+							"/typings/globals/gulp-ng-annotate/index.d.ts",
+							"/typings/globals/gulp-sourcemaps/index.d.ts",
+							"/typings/globals/gulp-tslint/index.d.ts",
+							"/typings/globals/gulp-typescript/index.d.ts"
+						]'>
+						<script type="text/plain" class="monaco-code">
+import * as gulp from 'gulp';
+import * as tslint from 'gulp-tslint';
+import * as typescript from 'gulp-typescript';
+import * as ngAnnotate from 'gulp-ng-annotate';
+
+gulp.task('compile', ['lint'], () => {
+	return gulp.src('**/*.ts')
+		.pipe(typescript({target: 'es2015', module: 'commonJS'}))
+		.pipe(ngAnnotate({remove: true}))
+		.pipe(gulp.dest('out'));
+});
+
+gulp.task('lint', () => {
+	return gulp.src('**/*.ts')
+		.pipe(tslint())
+		.pipe(tslint.report('verbose'));
+});
+							</script>
+					</monaco-editor>
+				</div>
+			</section>
+			<section>
+				<div><code>gulp.watch()</code> will watch the files for changes then execute one or more tasks</div>
+				<div class="stretch">
+					<monaco-editor reference='[
+							"/typings/globals/gulp/index.d.ts", 
+							"/typings/globals/orchestrator/index.d.ts", 
+							"/typings/globals/node/index.d.ts", 
+							"/typings/globals/q/index.d.ts", 
+							"/typings/globals/vinyl/index.d.ts",  
+							"/typings/globals/gulp-ng-annotate/index.d.ts",
+							"/typings/globals/gulp-sourcemaps/index.d.ts",
+							"/typings/globals/gulp-tslint/index.d.ts",
+							"/typings/globals/gulp-typescript/index.d.ts"
+						]'>
+						<script type="text/plain" class="monaco-code">
+import * as gulp from 'gulp';
+import * as tslint from 'gulp-tslint';
+import * as typescript from 'gulp-typescript';
+import * as ngAnnotate from 'gulp-ng-annotate';
+
+gulp.task('default', ['compile'], () => {
+	return gulp.watch('**/*.ts', ['compile']);
+});
+
+gulp.task('compile', ['lint'], () => {
+	return gulp.src('**/*.ts')
+		.pipe(typescript({target: 'es2015', module: 'commonJS'}))
+		.pipe(ngAnnotate({remove: true}))
+		.pipe(gulp.dest('out'));
+});
+
+gulp.task('lint', () => {
+	return gulp.src('**/*.ts')
+		.pipe(tslint())
+		.pipe(tslint.report('verbose'));
+});
+							</script>
+					</monaco-editor>
+				</div>
+			</section>
+			<section>
 				<h2>Where do we start?</h2>
 				<section>
 					<blockquote>

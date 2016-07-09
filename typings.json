@@ -1,0 +1,15 @@
+{
+  "name": "reveal.js",
+  "dependencies": {},
+  "globalDependencies": {
+    "gulp": "registry:dt/gulp#3.8.0+20160316155526",
+    "gulp-ng-annotate": "registry:dt/gulp-ng-annotate#0.0.0+20160316155526",
+    "gulp-sourcemaps": "registry:dt/gulp-sourcemaps#0.0.0+20160316155526",
+    "gulp-tslint": "registry:dt/gulp-tslint#3.6.0+20160316155526",
+    "gulp-typescript": "registry:dt/gulp-typescript#0.0.0+20160317120654",
+    "node": "registry:dt/node#6.0.0+20160709114037",
+    "orchestrator": "registry:dt/orchestrator#0.0.0+20160316155526",
+    "q": "registry:dt/q#0.0.0+20160613154756",
+    "vinyl": "registry:dt/vinyl#1.1.0+20160316155526"
+  }
+}
