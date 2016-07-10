@@ -5,7 +5,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>reveal.js</title>
+	<title>Gulp</title>
+
+	<link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+	<link rel="shortcut icon" type="image/png" href="http://png-1.findicons.com/files/icons/2338/reflection/128/presentation.png"/>
 
 	<link rel="stylesheet" href="css/reveal.css">
 	<link rel="stylesheet" href="css/theme/black.css">
@@ -124,16 +127,17 @@
 				<h1>Gulp Basics</h1>
 			</section>
 			<section>
-				<code>gulp.task</code> defines a task 
+				<code>gulp.task</code> defines a task
 				<div class="stretch">
 					<monaco-editor reference='[
 							"/typings/globals/gulp/index.d.ts", 
 							"/typings/globals/orchestrator/index.d.ts", 
 							"/typings/globals/node/index.d.ts", 
 							"/typings/globals/q/index.d.ts" 
-						]'>
+						]' language="javascript">
 						<script type="text/plain" class="monaco-code">
 import * as gulp from 'gulp';
+import { doSomething } from 'someplace';
 
 // run this using `gulp`
 gulp.task('default', () => {
@@ -154,8 +158,8 @@ gulp.task('async-stuff', (done) => {
 				</div>
 			</section>
 			<section>
-				<div><code>gulp.src</code> takes source files and creates a stream of file objects</div> 
-				<div><code>gulp.dest</code> writes the transformed source files back to disk</div> 
+				<div><code>gulp.src</code> takes source files and creates a stream of file objects</div>
+				<div><code>gulp.dest</code> writes the transformed source files back to disk</div>
 				<div class="stretch">
 					<monaco-editor reference='[
 							"/typings/globals/gulp/index.d.ts", 
@@ -211,9 +215,7 @@ gulp.task('default', () => {
 			<section>
 				<div>Gulp plugins give you many options for transforming your files</div>
 				<div class="stretch">
-					<iframe src="http://gulpjs.com/plugins/" 
-									frameborder="1" style="width: 100%; height: 100%"
-									title="This iframe won't load when this page is served over HTTPS. Use the link below to view the content.">
+					<iframe src="http://gulpjs.com/plugins/" frameborder="1" style="width: 100%; height: 100%" title="This iframe won't load when this page is served over HTTPS. Use the link below to view the content.">
 					</iframe>
 				</div>
 				<div><a href="http://gulpjs.com/plugins">gulpjs.com/plugins</a></div>
@@ -296,47 +298,42 @@ gulp.task('lint', () => {
 			</section>
 			<section>
 				<h2>Where do we start?</h2>
-				<section>
-					<blockquote>
-						the most successful lazy people understand the problem they are avoiding
-					</blockquote>
-				</section>
-				<section>
-					<h3>The problem</h3>
-					Building a production-quality web app requires a lot of steps<br /><br />
-					<i class="fragment">*for the purposes of this discussion we'll talk about building an Angular 1.x app with TypeScript</i>
-				</section>
-				<section>
-					<h3>High-Level Objectives</h3>
-					<ul>
-						<li>serve up code while developing</li>
-						<li>run tests (unit tests and/or ui tests)</li>
-						<li>optimize / bundle app for production</li>
-						<li>serve up production version for prerelease testing</li>
-						<li>deal with the backend server (Node, Java, etc.)</li>
-					</ul>
-				</section>
-				<section>
-					<h3>How would I do the process manually?</h3>
-					<h4>Development</h4>
-					<ul>
-						<li>make a code change and save</li>
-						<li>lint the code</li>
-						<li>compile the TS to JS</li>
-						<li>run ngAnnotate</li>
-						<li>compile SASS to CSS</li>
-						<li>inject script references into HTML file</li>
-						<li>serve the code</li>
-						<li>verify the results</li>
-					</ul>
-				</section>
+				<blockquote>
+					the most successful lazy people understand the problem they are avoiding
+				</blockquote>
 			</section>
-			<!--<section>
-				<h1>test?</h1>
+			<section>
+				<h3>The problem</h3>
+				Building a production-quality web app requires a lot of steps
 				<div class="stretch">
-					<monaco-editor language="html" url="./index.html"></monaco-editor>
+					<img src="images/wordcloud.png?source=http://timdream.org/wordcloud2.js/" alt="mastering modern web development requires mastering many, many tools and concepts">
 				</div>
-			</section>-->
+				<i class="fragment">*for the purposes of this discussion we'll talk about building an Angular 1.x app with TypeScript</i>
+			</section>
+			<section>
+				<h3>High-Level Objectives</h3>
+				<ul>
+					<li>serve up code while developing</li>
+					<li>run tests (unit tests and/or ui tests)</li>
+					<li>optimize / bundle app for production</li>
+					<li>serve up production version for prerelease testing</li>
+					<li>deal with the backend server (Node, Java, etc.)</li>
+				</ul>
+			</section>
+			<section>
+				<h3>How would I do the process manually?</h3>
+				<h4>Development</h4>
+				<ul>
+					<li>make a code change and save</li>
+					<li>lint the code</li>
+					<li>compile the TS to JS</li>
+					<li>run ngAnnotate</li>
+					<li>compile SASS to CSS</li>
+					<li>inject script references into HTML file</li>
+					<li>serve the code</li>
+					<li>verify the results</li>
+				</ul>
+			</section>
 			<section data-background="images/bill-gates-quotes2.jpg?source=http://cdn4.geckoandfly.com/wp-content/uploads/2014/02/bill-gates-quotes2.jpg">
 			</section>
 		</div>
