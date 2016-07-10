@@ -148,6 +148,10 @@
 					<h1>Gulp Basics</h1>
 				</section>
 				<section>
+					Gulp runs tasks from a Gulpfile<br>
+					(gulpfile.js, gulpfile.ts, gulpfile.coffee, etc.)
+				</section>
+				<section>
 					<code>gulp.task</code> defines a task
 					<div class="stretch">
 						<monaco-editor reference='[
@@ -157,23 +161,23 @@
 								"/typings/globals/q/index.d.ts" 
 							]' language="javascript">
 							<script type="text/plain" class="monaco-code">
-	import * as gulp from 'gulp';
-	import { doSomething } from 'someplace';
+import * as gulp from 'gulp';
+import { doSomething } from 'someplace';
 
-	// run this using `gulp`
-	gulp.task('default', () => {
-		//do stuff here
+// run this using `gulp`
+gulp.task('default', () => {
+	//do stuff here
+});
+
+// run this using `gulp async-stuff`
+gulp.task('async-stuff', (done) => {
+	//do stuff here
+	doSomethingAsync((err, result) => {
+		done(); //call the callback when the task is done
 	});
+});
 
-	// run this using `gulp async-stuff`
-	gulp.task('async-stuff', (done) => {
-		//do stuff here
-		doSomethingAsync((err, result) => {
-			done(); //call the callback when the task is done
-		});
-	});
-
-	// you can also return a Node stream or a Promise
+// you can also return a Node stream or a Promise
 								</script>
 						</monaco-editor>
 					</div>
@@ -189,14 +193,14 @@
 								"/typings/globals/q/index.d.ts" 
 							]'>
 							<script type="text/plain" class="monaco-code">
-	import * as gulp from 'gulp';
+import * as gulp from 'gulp';
 
-	gulp.task('default', () => {
-		return gulp.src('**/*.js')
-			.pipe(gulp.dest('./out'));
-	});
+gulp.task('default', () => {
+	return gulp.src('**/*.js')
+		.pipe(gulp.dest('./out'));
+});
 
-	// (no transforms = just copy the files)
+// (no transforms = just copy the files)
 								</script>
 						</monaco-editor>
 					</div>
@@ -216,19 +220,19 @@
 								"/typings/globals/gulp-typescript/index.d.ts"
 							]'>
 							<script type="text/plain" class="monaco-code">
-	import * as gulp from 'gulp';
-	import * as tslint from 'gulp-tslint';
-	import * as typescript from 'gulp-typescript';
-	import * as ngAnnotate from 'gulp-ng-annotate';
+import * as gulp from 'gulp';
+import * as tslint from 'gulp-tslint';
+import * as typescript from 'gulp-typescript';
+import * as ngAnnotate from 'gulp-ng-annotate';
 
-	gulp.task('default', () => {
-		return gulp.src('**/*.ts')
-			.pipe(tslint())
-			.pipe(typescript({target: 'es2015', module: 'commonJS'}))
-			.js
-			.pipe(ngAnnotate({remove: true}))
-			.pipe(gulp.dest('out'));
-	});
+gulp.task('default', () => {
+	return gulp.src('**/*.ts')
+		.pipe(tslint())
+		.pipe(typescript({target: 'es2015', module: 'commonJS'}))
+		.js
+		.pipe(ngAnnotate({remove: true}))
+		.pipe(gulp.dest('./out'));
+});
 								</script>
 						</monaco-editor>
 					</div>
@@ -256,23 +260,23 @@
 								"/typings/globals/gulp-typescript/index.d.ts"
 							]'>
 							<script type="text/plain" class="monaco-code">
-	import * as gulp from 'gulp';
-	import * as tslint from 'gulp-tslint';
-	import * as typescript from 'gulp-typescript';
-	import * as ngAnnotate from 'gulp-ng-annotate';
+import * as gulp from 'gulp';
+import * as tslint from 'gulp-tslint';
+import * as typescript from 'gulp-typescript';
+import * as ngAnnotate from 'gulp-ng-annotate';
 
-	gulp.task('compile', ['lint'], () => {
-		return gulp.src('**/*.ts')
-			.pipe(typescript({target: 'es2015', module: 'commonJS'}))
-			.pipe(ngAnnotate({remove: true}))
-			.pipe(gulp.dest('out'));
-	});
+gulp.task('compile', ['lint'], () => {
+	return gulp.src('**/*.ts')
+		.pipe(typescript({target: 'es2015', module: 'commonJS'}))
+		.pipe(ngAnnotate({remove: true}))
+		.pipe(gulp.dest('./out'));
+});
 
-	gulp.task('lint', () => {
-		return gulp.src('**/*.ts')
-			.pipe(tslint())
-			.pipe(tslint.report('verbose'));
-	});
+gulp.task('lint', () => {
+	return gulp.src('**/*.ts')
+		.pipe(tslint())
+		.pipe(tslint.report('verbose'));
+});
 								</script>
 						</monaco-editor>
 					</div>
@@ -292,27 +296,27 @@
 								"/typings/globals/gulp-typescript/index.d.ts"
 							]'>
 							<script type="text/plain" class="monaco-code">
-	import * as gulp from 'gulp';
-	import * as tslint from 'gulp-tslint';
-	import * as typescript from 'gulp-typescript';
-	import * as ngAnnotate from 'gulp-ng-annotate';
+import * as gulp from 'gulp';
+import * as tslint from 'gulp-tslint';
+import * as typescript from 'gulp-typescript';
+import * as ngAnnotate from 'gulp-ng-annotate';
 
-	gulp.task('default', ['compile'], () => {
-		return gulp.watch('**/*.ts', ['compile']);
-	});
+gulp.task('default', ['compile'], () => {
+	return gulp.watch('**/*.ts', ['compile']);
+});
 
-	gulp.task('compile', ['lint'], () => {
-		return gulp.src('**/*.ts')
-			.pipe(typescript({target: 'es2015', module: 'commonJS'}))
-			.pipe(ngAnnotate({remove: true}))
-			.pipe(gulp.dest('out'));
-	});
+gulp.task('compile', ['lint'], () => {
+	return gulp.src('**/*.ts')
+		.pipe(typescript({target: 'es2015', module: 'commonJS'}))
+		.pipe(ngAnnotate({remove: true}))
+		.pipe(gulp.dest('./out'));
+});
 
-	gulp.task('lint', () => {
-		return gulp.src('**/*.ts')
-			.pipe(tslint())
-			.pipe(tslint.report('verbose'));
-	});
+gulp.task('lint', () => {
+	return gulp.src('**/*.ts')
+		.pipe(tslint())
+		.pipe(tslint.report('verbose'));
+});
 								</script>
 						</monaco-editor>
 					</div>
@@ -357,16 +361,34 @@
 						<li>verify the results</li>
 					</ul>
 				</section>
+				<section>
+					TODO: sample implementation
+				</section>
 			</section>
 			<section>
-				<h1>Now it's your turn!</h1>
+				<section>
+					<h2>Don't reinvent the wheel</h2>
+					If someone has already found a good solution,<br>adapt it to your own use case!
+				</section>
+				<section>
+					TODO: complete example (mars-ts)
+				</section>
+			</section>
+			<section>
+				<img class="stretch" src="images/allTooEasy.jpg?source=http://i.qkme.me/3v92cq.jpg" alt="">
+			</section>
+			<section data-background="images/bill-gates-quotes2.jpg?source=http://cdn4.geckoandfly.com/wp-content/uploads/2014/02/bill-gates-quotes2.jpg">
+			</section>
+			<section>
+				<h3>Now it's your turn!</h3>
 				<pre><code style="font-size: xx-large; text-align: center;">npm install -g gulp</code></pre>
 				<img src="images/qr-slides.png" alt="https://joeskeen.github.io/gulp-OpenWest2016" style="vertical-align: middle">
 				Slides: <a href="https://joeskeen.github.io/gulp-OpenWest2016">joeskeen.github.io/gulp-OpenWest2016</a><br>
 				Example code: <a href="https://github.com/joeskeen/ngExamples/tree/master/mars-ts">github.com/joeskeen/ngExamples</a>
-				<img src="images/qr-sample.png" alt="https://github.com/joeskeen/ngExamples/tree/master/mars-ts" style="vertical-align: middle">
-			</section>
-			<section data-background="images/bill-gates-quotes2.jpg?source=http://cdn4.geckoandfly.com/wp-content/uploads/2014/02/bill-gates-quotes2.jpg">
+				<img src="images/qr-sample.png" alt="https://github.com/joeskeen/ngExamples/tree/master/mars-ts" style="vertical-align: middle"><br>
+				<img src="images/qr-joindin.png" alt="https://joind.in/talk/7bf7f" style="vertical-align: middle">
+				Review this talk: <a href="https://joind.in/talk/7bf7f">https://joind.in/talk/7bf7f</a><br>
+				<span style="font-size: smaller"><u>JavaScript Build Automation With Gulp.js</u><br>by John Papa on Pluralsight</span>
 			</section>
 		</div>
 	</div>
