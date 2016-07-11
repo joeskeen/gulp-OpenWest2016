@@ -1,3 +1,20 @@
+# gulp-OpenWest2016
+
+A presentation by Joe Skeen, presented at the OpenWest 2016 Conference.
+
+All the code examples that appeared on the slides are in index.html.  Before running be sure to run `npm install`.  Run using `grunt serve`.
+
+Or... you can view this presentation online at <https://joeskeen.github.io/gulp-OpenWest2016>.
+
+Please let me know in the issues if you have any feedback on the presentation!
+
+-Joe Skeen
+
+
+
+
+------------- Original Readme for Reveal.js ------------------
+
 # reveal.js [![Build Status](https://travis-ci.org/hakimel/reveal.js.svg?branch=master)](https://travis-ci.org/hakimel/reveal.js) <a href="https://slides.com?ref=github"><img src="https://s3.amazonaws.com/static.slid.es/images/slides-github-banner-320x40.png?1" alt="Slides" width="160" height="20"></a>
 
 A framework for easily creating beautiful presentations using HTML. [Check out the live demo](http://lab.hakim.se/reveal-js/).
