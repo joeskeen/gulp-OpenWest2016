@@ -207,6 +207,38 @@ gulp.task('default', () => {
 				</section>
 				<section>
 					<div>Call <code>.pipe()</code> on the stream to add a transform step for the files</div>
+					<img src="images/pipe.png?source=http://www.slideshare.net/ddprrt/advanced-javascript-build-pipelines-using-gulpjs-55373037#27" 
+							 alt="pipes in Gulp" style="height: 290px; margin: 10px; margin-bottom: -30px; background: black; padding-left: 110px; padding-right: 100px;"><br/>
+					<span style="font-size: xx-small; margin: 0; margin-top: -10px"><a href="http://www.slideshare.net/ddprrt/advanced-javascript-build-pipelines-using-gulpjs-55373037#27">Image Source</a></span>
+					<div class="stretch">
+						<monaco-editor reference='[
+								"/typings/globals/gulp/index.d.ts", 
+								"/typings/globals/orchestrator/index.d.ts", 
+								"/typings/globals/node/index.d.ts", 
+								"/typings/globals/q/index.d.ts", 
+								"/typings/globals/vinyl/index.d.ts",  
+								"/typings/globals/gulp-uglify/index.d.ts",
+								"/typings/globals/uglify-js/index.d.ts",
+								"/typings/globals/gulp-concat/index.d.ts",
+								"/typings/globals/source-map/index.d.ts"
+							]'>
+							<script type="text/plain" class="monaco-code">
+import * as gulp from 'gulp';
+import * as uglify from 'gulp-uglify';
+import * as concat from 'gulp-concat';
+
+gulp.task('default', () => {
+	return gulp.src('**/*.js')
+		.pipe(uglify())
+		.pipe(concat('scripts.js'))
+		.pipe(gulp.dest('./out'));
+});
+								</script>
+						</monaco-editor>
+					</div>
+				</section>
+				<section>
+					<div>Call <code>.pipe()</code> on the stream to add a transform step for the files</div>
 					<div class="stretch">
 						<monaco-editor reference='[
 								"/typings/globals/gulp/index.d.ts", 
@@ -507,13 +539,46 @@ gulp.task('styles', () => {
 				<h3>Now it's your turn!</h3>
 				<pre><code style="font-size: xx-large; text-align: center;">npm install -g gulp-cli</code></pre>
 				<pre><code style="font-size: xx-large; text-align: center;">npm install --save-dev gulp</code></pre>
-				<img src="images/qr-slides.png" alt="https://joeskeen.github.io/gulp-OpenWest2016" style="vertical-align: middle">
+				<img src="images/qr-slides.png" alt="https://joeskeen.github.io/gulp-OpenWest2016" style="vertical-align: middle">&nbsp;&nbsp;
 				Slides: <a href="https://joeskeen.github.io/gulp-OpenWest2016">joeskeen.github.io/gulp-OpenWest2016</a><br>
-				Example code: <a href="https://github.com/joeskeen/ngExamples/tree/master/mars-ts">github.com/joeskeen/ngExamples</a>
-				<img src="images/qr-sample.png" alt="https://github.com/joeskeen/ngExamples/tree/master/mars-ts" style="vertical-align: middle"><br>
+				Review this talk: <a href="https://joind.in/talk/7bf7f">https://joind.in/talk/7bf7f</a>&nbsp;&nbsp;
 				<img src="images/qr-joindin.png" alt="https://joind.in/talk/7bf7f" style="vertical-align: middle">
-				Review this talk: <a href="https://joind.in/talk/7bf7f">https://joind.in/talk/7bf7f</a><br>
-				<span style="font-size: smaller"><u>JavaScript Build Automation With Gulp.js</u><br>by John Papa on Pluralsight</span>
+			</section>
+			<section>
+				<h3>More Resources</h3>
+				<ul>
+					<li>
+						Example code: 
+						<a href="https://github.com/joeskeen/ngExamples/tree/master/mars-ts">
+							github.com/joeskeen/ngExamples
+						</a>
+						(mars-ts folder)
+					</li>
+					<li>
+						<a href="https://app.pluralsight.com/library/courses/javascript-build-automation-gulpjs">
+							<u>JavaScript Build Automation With Gulp.js</u> by John Papa on Pluralsight</li>
+						</a>
+					<li>
+						<a href="http://www.slideshare.net/ddprrt/advanced-javascript-build-pipelines-using-gulpjs-55373037">
+							Advanced JavaScript Build Pipelines using Gulp.js
+						</a>
+					</li>
+					<li>
+						<a href="https://www.joezimjs.com/javascript/complete-guide-upgrading-gulp-4/">
+							The Complete-Ish Guide to Upgrading to Gulp 4
+						</a>
+					</li>
+					<li>
+						<a href="http://gulpjs.com/">
+							gulpjs.com (Official Page)
+						</a>
+					</li>
+					<li>
+						<a href="http://gulpjs.org/">
+							gulpjs.org (Unofficial Documentation Page)
+						</a>
+					</li>
+				</ul>
 			</section>
 		</div>
 	</div>
@@ -573,7 +638,7 @@ gulp.task('styles', () => {
 					var secondsRemaining = Math.floor((msRemaining / 1000) % 60); 
 					var minutesRemaining = Math.floor((msRemaining / 1000 / 60) % 60); 
 					var hoursRemaining = Math.floor(msRemaining / 1000 / 60 / 60); 
-					timerElement.innerText = hoursRemaining + ':' + minutesRemaining; // + ':' + secondsRemaining;
+					timerElement.innerText = (practiceMode ? '(Practice Mode) ': '') + hoursRemaining + ':' + minutesRemaining; // + ':' + secondsRemaining;
 				}, 1000);
 				
 				function practiceTimeRemaining() {
